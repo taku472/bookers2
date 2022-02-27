@@ -1,12 +1,22 @@
 <p id="notice"></p>
 <div class="container">
   <div class="row">
+    <div>
+      <% if @book.errors.any? %>
+        <%= @book.errors.count %> error prohibited this obj from being saved:
+        <ul>
+          <% @book.errors.full_messages.each do |message| %>
+             <li><%= message %></li>
+          <% end %>
+        </ul>
+      <% end %>
+    </div>
     <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
       <h2>Editing Book</h2>
       <%= form_with model: @book do |f| %>
         <div>
-          <%= f.label :Name %><br>
-          <%= f.text_field :name, autofocus: true %>
+          <%= f.label :Title %><br>
+          <%= f.text_field :title, autofocus: true %>
         </div>
 
         <div>
@@ -14,7 +24,7 @@
           <%= f.text_area :body, autofocus: true %>
         </div>
 
-        <%= f.submit 'Update Book' %><br>
+        <%= f.submit class: 'btn btn-secondary' %><br>
 
         <%= link_to "Show", book_path(@book.id) %>
         |

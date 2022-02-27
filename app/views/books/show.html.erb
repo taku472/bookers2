@@ -1,14 +1,6 @@
 <% flash.each do |key| %>
   <p><%= key %></p>
 <% end %>
-<% if @book.errors.any? %>
-  <%= @book.errors.count %>件のエラーが発生しました
-  <ul>
-    <% @book.errors.full_book.each do |book| %>
-      <li><%= book %></li>
-    <% end %>
-  </ul>
-<% end %>
 <p id="notice"></p>
 <div class="container px-5 px-sm-0">
   <div class="row">
