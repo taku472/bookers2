@@ -2,18 +2,24 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
-      <h2>User info</h2>
-      <%= form_with model: @user, url:'/users/current_user.id/edit' do |f| %>
-        <label>Name</label>
-        <%= f.text_field :name %>
+      <h2>Editing Book</h2>
+      <%= form_with model: @book do |f| %>
+        <div>
+          <%= f.label :Name %><br>
+          <%= f.text_field :name, autofocus: true %>
+        </div>
 
-        <label>Image</label>
-        <%= f.file_field :image, accept: "image/*" %>
+        <div>
+          <%= f.label :Opinion %><br>
+          <%= f.text_area :body, autofocus: true %>
+        </div>
 
-        <label>Introduction</label>
-        <%= f.text_area :introduction %>
+        <%= f.submit 'Update Book' %><br>
 
-        <%= f.submit 'Update User' %>
+        <%= link_to "Show", book_path(@book.id) %>
+        |
+        <%= link_to "Back", books_path %>
+      <% end %>
     </div>
   </div>
 </div>

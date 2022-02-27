@@ -1,1 +1,40 @@
-<%= render 'users/userinfo', users: @user %>
+<% flash.each do |key| %>
+  <p><%= key %></p>
+<% end %>
+<% if @book.errors.any? %>
+  <%= @book.errors.count %>件のエラーが発生しました
+  <ul>
+    <% @book.errors.full_book.each do |book| %>
+      <li><%= book %></li>
+    <% end %>
+  </ul>
+<% end %>
+<p id="notice"></p>
+<div class="container px-5 px-sm-0">
+  <div class="row">
+  <%= render 'users/userinfo', user: @user, book: @newbook %>
+    <div class="col-md-8 offset-md-1">
+        <h2>Book detail</h2>
+      <table class="table table-hover table-inverse">
+        <tbody>
+            <tr>
+              <td>
+                <%= link_to user_path(@book.user.id) do %>
+                  <%= image_tag @book.user.get_profile_image %>
+                <% end %><br>
+                <%= link_to user_path(@book.user.id) do %>
+                  <%= @book.user.name %>
+                <% end %>
+              </td>
+              <td><%= link_to @book.title, book_path(@book) %></td>
+              <td><%= @book.body %></td>
+              <% if current_user.id == @book.user.id %>
+                <td><%= link_to 'Edit', edit_book_path(@book) %></td>
+                <td><%= link_to 'Destroy', @book, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+              <% end %>
+            </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
